@@ -7,7 +7,7 @@ export class AppService {
     return Object.keys(countries);
   }
 
-  getCitiesOfCountry(country) {
+  getCitiesOfCountry(country: string) {
     return countries[country];
   }
 }
