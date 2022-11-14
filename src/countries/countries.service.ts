@@ -31,8 +31,17 @@ export class CountriesService {
     return arr;
   }
 
-  async getCitiesOfCountry(countrySymbol: string) {
-    const country = await this.countryModel.findOne({ symbol: countrySymbol });
+  async getCitiesOfCountry(
+    countrySymbol: string,
+    documentsToSkip = 0,
+    limitOfDocuments = 10,
+  ) {
+    const country = await this.countryModel.findOne(
+      { symbol: countrySymbol },
+      {
+        cities: { $slice: [Number(documentsToSkip), Number(limitOfDocuments)] },
+      },
+    );
     return country.cities;
   }
 }

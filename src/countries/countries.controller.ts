@@ -17,7 +17,10 @@ export class CountriesController {
   }
 
   @Get(':countrySymbol')
-  getCitiesOfCountry(@Param('countrySymbol') countrySymbol) {
-    return this.countriesService.getCitiesOfCountry(countrySymbol);
+  getCitiesOfCountry(
+    @Param('countrySymbol') countrySymbol,
+    @Query() { skip, limit }: PaginationParams,
+  ) {
+    return this.countriesService.getCitiesOfCountry(countrySymbol, skip, limit);
   }
 }
