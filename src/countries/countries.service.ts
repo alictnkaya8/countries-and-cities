@@ -5,7 +5,7 @@ import { countries } from './countries';
 import { Country, CountryDocument } from './country.schema';
 
 @Injectable()
-export class AppService {
+export class CountriesService {
   constructor(
     @InjectModel(Country.name) private countryModel: Model<CountryDocument>,
   ) {}
@@ -17,9 +17,14 @@ export class AppService {
   //   });
   // }
 
-  async getAllCountries() {
+  async getAllCountries(documentsToSkip = 0, limitOfDocuments = 10) {
     let arr = [];
-    const allCountries = await this.countryModel.find();
+    const allCountries = await this.countryModel
+      .find()
+      .sort({ _id: 1 })
+      .skip(documentsToSkip)
+      .limit(limitOfDocuments);
+
     allCountries.forEach((country) => {
       arr.push(country.name);
     });
