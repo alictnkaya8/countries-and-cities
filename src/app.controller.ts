@@ -5,13 +5,18 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
+  // @Get()
+  // save() {
+  //   return this.appService.save();
+  // }
+
   @Get()
   getAllCountries() {
     return this.appService.getAllCountries();
   }
 
-  @Get(':country')
-  getCitiesOfCountry(@Param('country') country) {
-    return this.appService.getCitiesOfCountry(country);
+  @Get(':countrySymbol')
+  getCitiesOfCountry(@Param('countrySymbol') countrySymbol) {
+    return this.appService.getCitiesOfCountry(countrySymbol);
   }
 }
